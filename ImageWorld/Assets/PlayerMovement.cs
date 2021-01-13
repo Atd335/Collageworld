@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
+    public NetworkIdentity NI;
+
     CharacterController CC;
 
     public Transform head;
@@ -32,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!NI.isLocalPlayer) { return; }
         if (inMenu)
         {
             Cursor.lockState = CursorLockMode.Confined;

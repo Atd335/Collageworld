@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class InteractorScript : MonoBehaviour
+public class InteractorScript : NetworkBehaviour
 {
+    public NetworkIdentity NI;
 
     public TextMeshPro modeText;
 

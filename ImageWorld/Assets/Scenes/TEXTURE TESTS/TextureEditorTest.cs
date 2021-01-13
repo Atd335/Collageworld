@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TextureEditorTest : MonoBehaviour
+public class TextureEditorTest : NetworkBehaviour
 {
     Color[] cBlock;
-    
+
+    public NetworkIdentity NI;
 
     // Start is called before the first frame update
     void Start()

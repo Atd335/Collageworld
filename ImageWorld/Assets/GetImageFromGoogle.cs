@@ -6,8 +6,13 @@ using UnityEngine.Networking;
 using System.Text;
 using System.Linq;
 using TMPro;
-public class GetImageFromGoogle : MonoBehaviour
+using Mirror;
+
+
+public class GetImageFromGoogle : NetworkBehaviour
 {
+    public NetworkIdentity NI;
+
     public string querey;
     string lastQuerey;
     public int resultID;
