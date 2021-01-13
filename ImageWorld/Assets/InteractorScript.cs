@@ -22,7 +22,7 @@ public class InteractorScript : MonoBehaviour
     public Color[] colors;
     public int colorInt = 0;
 
-    public int interactMode;
+    public static int interactMode;
     //0 - move
     //1 - delete
     //2 - mask
@@ -33,6 +33,11 @@ public class InteractorScript : MonoBehaviour
 
     string[] modes = { "moving","destroy","cut-out","sketchify","duplicate","flip","colors"};
 
+    public Transform iconWheel;
+
+    public SpriteRenderer crosshair;
+    public Sprite[] hairs;
+
     void Update()
     {
         if (PlayerMovement.inMenu) { return; }
@@ -41,7 +46,14 @@ public class InteractorScript : MonoBehaviour
         {
             interactMode += Mathf.RoundToInt(Mathf.Sign(Input.GetAxisRaw("Mouse ScrollWheel")));
         }
-
+        if (interactMode>6)
+        {
+            interactMode = 0;
+        }
+        if (interactMode<0)
+        {
+            interactMode = 6;
+        }
         interactMode = Mathf.Clamp(interactMode,0,6);
         modeText.text = modes[interactMode];
 
@@ -70,6 +82,9 @@ public class InteractorScript : MonoBehaviour
             colorChange();
         }
         Camera.main.GetComponent<TextureEditorTest>().enabled = interactMode == 2;
+
+        iconWheel.localRotation = Quaternion.Lerp(iconWheel.localRotation, Quaternion.Euler(0, 0, (360 / 7) * interactMode),Time.deltaTime * 15);
+        crosshair.sprite = hairs[interactMode];
     }
 
     void colorChange()

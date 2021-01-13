@@ -46,8 +46,11 @@ public class PlayerMovement : MonoBehaviour
 
         headRotations();
         keyInputs();
+    }
 
-        CC.Move(moveDirectionDone*Time.deltaTime);
+    private void FixedUpdate()
+    {
+        CC.Move(moveDirectionDone * Time.deltaTime);
     }
 
     void pauseInputs()
