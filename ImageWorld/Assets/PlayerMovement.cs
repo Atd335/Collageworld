@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     public static bool inMenu;
     public static Transform spawnLoc;
 
+    public bool cinematicView;
+    public Camera normCam;
+    public Camera uiCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (Input.GetKeyDown(KeyCode.F1)) { cinematicView = !cinematicView; }
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -46,16 +51,48 @@ public class PlayerMovement : MonoBehaviour
 
         headRotations();
         keyInputs();
+
+
+        if (cinematicView)
+        {
+            uiCam.depth = -1;
+            normCam.depth = 1;
+        }
+        else
+        {
+            uiCam.depth = 1;
+            normCam.depth = -1;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (isGrounded)
+        {
+            moveDirection.y = -1f;
+            if (Input.GetKey(KeyCode.Space) && !inMenu && !PauseMenuScript.imPaused)
+            {
+                moveDirection.y = jumpHeight;
+            }
+        }
+        else
+        {
+            moveDirection.y -= grav;
+        }
+
+        //moveDirection = Vector3.ClampMagnitude(moveDirection,1);
+        moveDirection = moveDirection.x * headMast.right + moveDirection.z * headMast.forward + moveDirection.y * headMast.up;
+
+        moveDirectionDone = moveDirection;
+        moveDirectionDone.x *= speed;
+        moveDirectionDone.z *= speed;
+
         CC.Move(moveDirectionDone * Time.deltaTime);
     }
 
     void pauseInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !PauseMenuScript.imPaused)
         {
             inMenu = !inMenu;
         }
@@ -86,27 +123,6 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = new Vector3(0,moveDirection.y,0);
         }
-
-        if (isGrounded)
-        {
-            moveDirection.y = -1f;
-            if (Input.GetKey(KeyCode.Space) && !inMenu && !PauseMenuScript.imPaused)
-            {
-                moveDirection.y = jumpHeight;
-            }
-        }
-        else
-        {
-            moveDirection.y -= grav;
-        }
-
-        //moveDirection = Vector3.ClampMagnitude(moveDirection,1);
-        moveDirection = moveDirection.x * headMast.right + moveDirection.z * headMast.forward + moveDirection.y * headMast.up;
-
-        moveDirectionDone = moveDirection;
-        moveDirectionDone.x *= speed;
-        moveDirectionDone.z *= speed;
-
 
     }
 }

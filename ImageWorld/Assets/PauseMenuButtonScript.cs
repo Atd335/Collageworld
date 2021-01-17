@@ -5,15 +5,19 @@ using UnityEngine;
 public class PauseMenuButtonScript : MonoBehaviour
 {
     public bool isHovered;
-
+    public bool isActivated;
+    public PlayerMovement PM;
+    public PauseMenuScript PMS;
     // Start is called before the first frame update
     void Start()
     {
+        PMS = GetComponentInParent<PauseMenuScript>();
+        PM = transform.parent.transform.parent.GetComponentInChildren<PlayerMovement>();
         initScale = transform.localScale;
         selScale = initScale * 1.1f;
     }
 
-    Vector3 initScale;
+    public Vector3 initScale;
     Vector3 selScale;
 
     // Update is called once per frame

@@ -8,11 +8,17 @@ public class SaveStage : MonoBehaviour
 {
     GameObject Images;
     public string worldName;
+
+    private void Awake()
+    {
+        worldName = WorldNamePasser.worldName;
+    }
+
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {   
         Images = GameObject.Find("ALL_IMAGES");
+        SaveWorld();
     }
 
     // Update is called once per frame
@@ -20,13 +26,13 @@ public class SaveStage : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K) && worldName!="")
         {
-            SaveWorld();
+            //SaveWorld();
         }
     }
 
     public void SaveWorld()
     {
-
+        if (worldName == "" || worldName==null) { return; }
         if (Directory.Exists("C:/CollageWorld/SavedInfo/" + $"{worldName}"))
         if (Directory.Exists("C:/CollageWorld/SavedInfo/" + $"{worldName}"))
         { Directory.Delete("C:/CollageWorld/SavedInfo/" + $"{worldName}", true); }
