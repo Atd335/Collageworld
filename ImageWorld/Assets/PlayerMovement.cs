@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        if (inMenu)
+        if (inMenu || PauseMenuScript.imPaused)
         {
             Cursor.lockState = CursorLockMode.Confined;
         }
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     void headRotations()
     {
-        if (!inMenu && !Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftAlt))
+        if (!inMenu && !PauseMenuScript.imPaused && !Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftAlt))
         {
             xRot -= Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSens;
             yRot += Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSens;
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     void keyInputs()
     {
         isGrounded = CC.isGrounded;
-        if (!inMenu)
+        if (!inMenu && !PauseMenuScript.imPaused)
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), moveDirection.y, Input.GetAxis("Vertical"));
         }
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             moveDirection.y = -1f;
-            if (Input.GetKey(KeyCode.Space) && !inMenu)
+            if (Input.GetKey(KeyCode.Space) && !inMenu && !PauseMenuScript.imPaused)
             {
                 moveDirection.y = jumpHeight;
             }

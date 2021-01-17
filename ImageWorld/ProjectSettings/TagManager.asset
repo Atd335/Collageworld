@@ -6,6 +6,7 @@ TagManager:
   tags:
   - image
   - interactable
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - IMAGES
   - physicalImages
   - SKY
-  - 
+  - PAUSEUI
   - 
   - 
   - 
@@ -48,4 +49,7 @@ TagManager:
     locked: 0
   - name: SPRITES
     uniqueID: 2610748679
+    locked: 0
+  - name: PAUSE
+    uniqueID: 2508755313
     locked: 0

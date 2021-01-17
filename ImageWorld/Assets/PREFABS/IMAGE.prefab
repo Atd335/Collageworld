@@ -454,6 +454,11 @@ MonoBehaviour:
   MRs:
   - {fileID: 8723691990745583540}
   - {fileID: 8723691990146837175}
+  url: 
+  IMAGEID: 0
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  SI: {fileID: 96884088216293535}
+  sketchified: 0
   sprMesh:
   - {fileID: 4154179820484074327}
   - {fileID: 7670681841054112472}

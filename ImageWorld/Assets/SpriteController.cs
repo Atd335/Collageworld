@@ -37,7 +37,7 @@ public class SpriteController : MonoBehaviour
         {
             transform.parent = GameObject.Find("ALL_IMAGES").transform;
         }
-        if (PlayerMovement.inMenu)
+        if (PlayerMovement.inMenu || PauseMenuScript.imPaused)
         {
             transform.parent = GameObject.Find("ALL_IMAGES").transform;
         }

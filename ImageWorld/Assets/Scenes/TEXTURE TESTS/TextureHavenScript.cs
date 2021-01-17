@@ -9,6 +9,16 @@ public class TextureHavenScript : MonoBehaviour
     public Texture2D refTex;
     public MeshRenderer[] MRs;
     Vector2 texSize;
+
+    public string url;
+
+    public int IMAGEID;
+
+    public Color currentColor;
+
+    public SketchifyItem SI;
+    public bool sketchified;
+
     // Start is called before the first frame update
     public void CreateImage()
     {
@@ -46,10 +56,13 @@ public class TextureHavenScript : MonoBehaviour
 
     private void Awake()
     {
+        IMAGEID = this.gameObject.GetInstanceID();
         if (editTex)
         {
             CreateImage();
         }
+
+        currentColor = Color.white;
     }
 
     public void UpdateTex()
@@ -79,6 +92,7 @@ public class TextureHavenScript : MonoBehaviour
     public MeshRenderer highlight;
     private void Update()
     {
+        sketchified = SI.enabled;
         //highlight.material.SetColor("_Color", new Color(highlight.material.color.r, highlight.material.color.g, highlight.material.color.b,1));
     }
 
@@ -86,6 +100,7 @@ public class TextureHavenScript : MonoBehaviour
     {
         MRs[0].material.SetColor("_Color", col);
         MRs[1].material.SetColor("_Color", col);
+        currentColor = col;
     }
 
     Mesh SpriteToMesh(Sprite sprite)

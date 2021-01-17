@@ -36,6 +36,7 @@ public class menuInteractScript : MonoBehaviour
         i.GetComponentsInChildren<MeshRenderer>()[0].material.mainTexture = tex;
         i.GetComponentsInChildren<MeshRenderer>()[1].material.mainTexture = tex;
         i.GetComponent<TextureHavenScript>().CreateImage();
+        i.GetComponent<TextureHavenScript>().url = url;
     }
 }
 

@@ -24,9 +24,9 @@ public class TextureEditorTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.inMenu) { return; }
-        if (Input.GetKeyDown(KeyCode.RightBracket)) { brushSize += 2; }
-        if (Input.GetKeyDown(KeyCode.LeftBracket)) { brushSize -= 2; }
+        if (PlayerMovement.inMenu || PauseMenuScript.imPaused) { return; }
+        if (Input.GetKeyDown(KeyCode.RightBracket)) { brushSize += 5; }
+        if (Input.GetKeyDown(KeyCode.LeftBracket)) { brushSize -= 5; }
 
         brushSize = Mathf.Clamp(brushSize,10,60);
 

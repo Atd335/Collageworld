@@ -38,9 +38,11 @@ public class InteractorScript : MonoBehaviour
     public SpriteRenderer crosshair;
     public Sprite[] hairs;
 
+
+
     void Update()
     {
-        if (PlayerMovement.inMenu) { return; }
+        if (PlayerMovement.inMenu || PauseMenuScript.imPaused) { return; }
 
         if (!Input.GetKey(KeyCode.Mouse0) && Input.GetAxisRaw("Mouse ScrollWheel")!=0)
         {
