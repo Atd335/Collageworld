@@ -27,15 +27,16 @@ public class SaveStage : MonoBehaviour
     public void SaveWorld()
     {
 
-        if (Directory.Exists("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}"))
-        { Directory.Delete("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}", true); }
+        if (Directory.Exists("C:/CollageWorld/SavedInfo/" + $"{worldName}"))
+        if (Directory.Exists("C:/CollageWorld/SavedInfo/" + $"{worldName}"))
+        { Directory.Delete("C:/CollageWorld/SavedInfo/" + $"{worldName}", true); }
 
-        Directory.CreateDirectory("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}");
+        Directory.CreateDirectory("C:/CollageWorld/SavedInfo/" + $"{worldName}");
 
-        if (File.Exists("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}/{worldName}.txt"))
-        { File.Delete("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}/{worldName}.txt"); }
+        if (File.Exists("C:/CollageWorld/SavedInfo/" + $"{worldName}/{worldName}.txt"))
+        { File.Delete("C:/CollageWorld/SavedInfo/" + $"{worldName}/{worldName}.txt"); }
 
-        StreamWriter writer = File.AppendText("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}/{worldName}.txt");
+        StreamWriter writer = File.AppendText("C:/CollageWorld/SavedInfo/" + $"{worldName}/{worldName}.txt");
 
         writer.WriteLine($"{Images.transform.childCount}");
         writer.WriteLine($"------------------------------------------");
@@ -43,7 +44,7 @@ public class SaveStage : MonoBehaviour
         foreach (TextureHavenScript i in Images.GetComponentsInChildren<TextureHavenScript>())
         {
             byte[] savedImage = i.editTex.EncodeToPNG();
-            File.WriteAllBytes("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldName}/" + i.IMAGEID.ToString() + ".png", savedImage);
+            File.WriteAllBytes("C:/CollageWorld/SavedInfo/" + $"{worldName}/" + i.IMAGEID.ToString() + ".png", savedImage);
             writer.WriteLine($"{i.IMAGEID}");
             writer.WriteLine($"POS: \n{i.transform.position.x},{i.transform.position.y},{i.transform.position.z}");
             writer.WriteLine($"ROT: \n{i.transform.rotation.eulerAngles.x},{i.transform.rotation.eulerAngles.y},{i.transform.rotation.eulerAngles.z}");

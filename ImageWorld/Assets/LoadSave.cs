@@ -21,7 +21,7 @@ public class LoadSave : MonoBehaviour
 
     public void LoadWorld()
     {
-        lines = File.ReadAllLines("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldToLoad}/{worldToLoad}.txt");
+        lines = File.ReadAllLines("C:/CollageWorld/SavedInfo/" + $"{worldToLoad}/{worldToLoad}.txt");
 
         numOfImages = int.Parse(lines[0].ToString()); //the number of images to spawn
 
@@ -49,7 +49,7 @@ public class LoadSave : MonoBehaviour
             imageID = lines[2 + (12 * i)];
             //tex
             loadedTex = new Texture2D(1, 1, TextureFormat.ARGB32, false);
-            loadedTex.LoadImage(File.ReadAllBytes("D:/CODE/CollageWorld/Collageworld/ImageWorld/Assets/SavedInfo/" + $"/{worldToLoad}/{imageID}.png"));
+            loadedTex.LoadImage(File.ReadAllBytes("C:/CollageWorld/SavedInfo/" + $"{worldToLoad}/{imageID}.png"));
             //pos
             loadedPos = new Vector3(float.Parse(lines[4 + (12 * i)].Split(',')[0]), float.Parse(lines[4 + (12 * i)].Split(',')[1]), float.Parse(lines[4 + (12 * i)].Split(',')[2]));
             //rot
