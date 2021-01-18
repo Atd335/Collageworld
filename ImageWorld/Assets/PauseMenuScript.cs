@@ -18,6 +18,7 @@ public class PauseMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        imPaused = false;
         currentSens = 2;
         pauseCam = GetComponent<Camera>();
     }

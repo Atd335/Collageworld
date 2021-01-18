@@ -24,7 +24,7 @@ public class LoadingAnim : MonoBehaviour
         else
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(0,-11,0), Time.deltaTime * 6);
-            if (transform.position.y <= 10) { SceneManager.LoadScene(2); }
+            if (transform.position.y <= -10) { SceneManager.LoadScene(2); }
         }
     }
 

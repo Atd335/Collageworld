@@ -33,8 +33,11 @@ public class CreateNewWorldScene : MonoBehaviour
         }
         else
         {
-            transform.localScale = button.initScale;
-            button.isActivated = false;
+            if (button.isActivated)
+            {
+                transform.localScale = button.initScale;
+                button.isActivated = false;
+            }
         }
     }
 }

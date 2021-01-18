@@ -11,6 +11,12 @@ public class LoadSave : MonoBehaviour
 
     public GameObject spawnedMesh;
 
+    private void Awake()
+    {
+        worldToLoad = WorldNamePasser.worldName;
+        if (WorldNamePasser.isLoading) { LoadWorld(); }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
