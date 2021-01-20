@@ -9,6 +9,9 @@ public class WorldNamePasser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(test());
+        StartCoroutine(test());
+        StartCoroutine(test());
         isLoading = false;
         DontDestroyOnLoad(this.gameObject);
     }
@@ -17,5 +20,12 @@ public class WorldNamePasser : MonoBehaviour
     void Update()
     {
         
+    }
+    IEnumerator test()
+    {
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        print("hi");
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
+        StartCoroutine(test());
     }
 }

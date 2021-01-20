@@ -51,7 +51,7 @@ public class LoadSave : MonoBehaviour
     {
         for (int i = 0; i < numOfImages; i++)
         {
-            print(lines[2 + (12 * i)]); //ID NUMBER
+            //print(lines[2 + (12 * i)]); //ID NUMBER
             //name
             imageID = lines[2 + (12 * i)];
             //tex

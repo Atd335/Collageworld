@@ -1,6 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
+using System.Text;
+using System.Linq;
+using TMPro;
 
 public class menuInteractScript : MonoBehaviour
 {
@@ -29,6 +34,7 @@ public class menuInteractScript : MonoBehaviour
 
     public void SpawnIt()
     {
+        print(url);
         Texture texture = GetComponent<MeshRenderer>().material.mainTexture;
         Texture2D tex = texture.ToTexture2D();
         //create the gameobject
@@ -38,6 +44,20 @@ public class menuInteractScript : MonoBehaviour
         i.GetComponent<TextureHavenScript>().CreateImage();
         i.GetComponent<TextureHavenScript>().url = url;
     }
+
+    IEnumerator DownloadImage(string MediaUrl)
+    {
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return request.SendWebRequest();
+        if (request.isNetworkError || request.isHttpError)
+            Debug.Log(request.error);
+        else
+            Debug.Log("SET!");
+            //YourRawImage[0].texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            //YourRawImage[0].SetNativeSize();
+        
+    }
+
 }
 
 public static class TextureExtentions

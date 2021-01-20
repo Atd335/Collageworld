@@ -390,6 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2784a37e503c0c14abd3e8843dd48cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHost: 0
+  Images: {fileID: 2112850398}
   worldName: New World
 --- !u!114 &237229725
 MonoBehaviour:
