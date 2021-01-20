@@ -5434,6 +5434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585ccdfb70556e4478854762f4a11e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  spawnedMesh: {fileID: 8723691990762865209, guid: 746be466ce6fc414db211209190e45e6, type: 3}
 --- !u!1 &6048293007562346331
 GameObject:
   m_ObjectHideFlags: 0

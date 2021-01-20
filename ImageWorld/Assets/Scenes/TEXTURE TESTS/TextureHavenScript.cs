@@ -54,6 +54,11 @@ public class TextureHavenScript : MonoBehaviour
         refTex.Apply();
     }
 
+    void CreateTexStepTwo()
+    {
+
+    }
+
     private void Awake()
     {
         IMAGEID = this.gameObject.GetInstanceID();

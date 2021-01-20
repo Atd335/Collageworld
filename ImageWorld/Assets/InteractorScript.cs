@@ -215,6 +215,10 @@ public class InteractorScript : MonoBehaviour
                     {
                         interactedOBJ = hit.collider.gameObject.transform.parent.transform.parent.gameObject;
                     }
+                    if (interactedOBJ.GetComponent<ImageSyncer>())
+                    {
+                        interactedOBJ.GetComponent<ImageSyncer>().UpdatePos();
+                    }
                     //Debug.Log("HEY HEY HEY");
                 }
                 else

@@ -34,15 +34,15 @@ public class menuInteractScript : MonoBehaviour
 
     public void SpawnIt()
     {
-        print(url);
-        Texture texture = GetComponent<MeshRenderer>().material.mainTexture;
-        Texture2D tex = texture.ToTexture2D();
-        //create the gameobject
-        GameObject i = Instantiate(spawnedMesh,PlayerMovement.spawnLoc.position,PlayerMovement.spawnLoc.rotation);
-        i.GetComponentsInChildren<MeshRenderer>()[0].material.mainTexture = tex;
-        i.GetComponentsInChildren<MeshRenderer>()[1].material.mainTexture = tex;
-        i.GetComponent<TextureHavenScript>().CreateImage();
-        i.GetComponent<TextureHavenScript>().url = url;
+        //print(url);
+        if (transform.parent.transform.parent.transform.parent.GetComponent<LoadSceneOnline>())
+        {
+            transform.parent.transform.parent.transform.parent.GetComponent<LoadSceneOnline>().SpawnIt(url, PlayerMovement.spawnLoc.position, PlayerMovement.spawnLoc.rotation.eulerAngles);
+        }
+        else
+        {
+            StartCoroutine(DownloadImage(url));
+        }
     }
 
     IEnumerator DownloadImage(string MediaUrl)
@@ -53,9 +53,22 @@ public class menuInteractScript : MonoBehaviour
             Debug.Log(request.error);
         else
             Debug.Log("SET!");
+            BuildImage(((DownloadHandlerTexture)request.downloadHandler).texture);
             //YourRawImage[0].texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
             //YourRawImage[0].SetNativeSize();
         
+    }
+
+    void BuildImage(Texture _tex)
+    {
+        Texture texture = _tex;
+        Texture2D tex = texture.ToTexture2D();
+        //create the gameobject
+        GameObject i = Instantiate(spawnedMesh, PlayerMovement.spawnLoc.position, PlayerMovement.spawnLoc.rotation);
+        i.GetComponentsInChildren<MeshRenderer>()[0].material.mainTexture = tex;
+        i.GetComponentsInChildren<MeshRenderer>()[1].material.mainTexture = tex;
+        i.GetComponent<TextureHavenScript>().CreateImage();
+        i.GetComponent<TextureHavenScript>().url = url;
     }
 
 }
