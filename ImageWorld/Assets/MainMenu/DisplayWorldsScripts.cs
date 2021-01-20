@@ -18,13 +18,12 @@ public class DisplayWorldsScripts : MonoBehaviour
             Directory.CreateDirectory(@"C:/CollageWorld/SavedInfo");
         }
         string[] names = Directory.GetDirectories(@"C:/CollageWorld/SavedInfo");
-        foreach (string str in names)
-        {
-            
 
-            print(str);
-            print(Directory.GetCreationTime(str));
-        }
+        //foreach (string str in names)
+        //{            
+        //   print(str);
+        //   print(Directory.GetCreationTime(str));
+        //}
 
         for (int i = 0; i < names.Length; i++)
         {

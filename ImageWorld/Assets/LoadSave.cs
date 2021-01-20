@@ -3,6 +3,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadSave : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class LoadSave : MonoBehaviour
     private void Awake()
     {
         worldToLoad = WorldNamePasser.worldName;
-        if (WorldNamePasser.isLoading) { LoadWorld(); }
+        if (WorldNamePasser.isLoading && SceneManager.GetActiveScene().buildIndex==2) { LoadWorld(); }
     }
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class LoadSave : MonoBehaviour
         lines = File.ReadAllLines("C:/CollageWorld/SavedInfo/" + $"{worldToLoad}/{worldToLoad}.txt");
 
         numOfImages = int.Parse(lines[0].ToString()); //the number of images to spawn
-
+        print(numOfImages);
         loadImages();
     }
 
@@ -71,6 +72,8 @@ public class LoadSave : MonoBehaviour
 
             //SPAWN THE OBJECT
         }
+
+        Debug.Log("WorldLoaded");
     }
 
     public void SpawnIt(Texture2D tex, Vector3 pos, Vector3 rot, Vector3 scale, Color color, bool sketched)

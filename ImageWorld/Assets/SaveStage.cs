@@ -3,6 +3,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveStage : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class SaveStage : MonoBehaviour
     void Start()
     {   
         Images = GameObject.Find("ALL_IMAGES");
-        SaveWorld();
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SaveWorld();
+        }
     }
 
     // Update is called once per frame
