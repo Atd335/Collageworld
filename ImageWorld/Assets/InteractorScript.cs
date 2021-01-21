@@ -177,7 +177,14 @@ public class InteractorScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    DelObj(hit.collider.gameObject.transform.parent.transform.parent.gameObject);
+                    if (hit.collider.gameObject.transform.parent.transform.parent.gameObject.GetComponent<ImageSyncer>())
+                    {
+                        hit.collider.gameObject.transform.parent.transform.parent.gameObject.GetComponent<ImageSyncer>().DestroyMe();
+                    }
+                    else
+                    {
+                        DelObj(hit.collider.gameObject.transform.parent.transform.parent.gameObject);
+                    }
                 }
             }
         }
@@ -201,7 +208,9 @@ public class InteractorScript : MonoBehaviour
 
     void DelObj(GameObject obj)
     {
+
         Destroy(obj);
+
     }
 
     void mover()

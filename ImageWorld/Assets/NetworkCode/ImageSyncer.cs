@@ -61,6 +61,25 @@ public class ImageSyncer : NetworkBehaviour
         StartCoroutine(DownloadImage(url));
     }
 
+    public void DestroyMe()
+    {
+        CmdDestroyMe();
+    }
+    [Command(ignoreAuthority = true)]
+    void CmdDestroyMe()
+    {
+        RpcDestroyMe();
+    }
+    [ClientRpc]
+    void RpcDestroyMe()
+    {
+        if (NetworkServer.active)
+        {
+            print("DESTROYED OBJ");
+            NetworkServer.Destroy(this.gameObject);          
+        }
+    }
+
 
     IEnumerator DownloadImage(string MediaUrl)
     {
