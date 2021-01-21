@@ -6,6 +6,8 @@ using Mirror;
 
 public class LoadSceneOnline : NetworkBehaviour
 {
+
+    public MeshRenderer CHARACTER;
     public override void OnStartClient()
     {
         if (!isLocalPlayer)
@@ -18,6 +20,7 @@ public class LoadSceneOnline : NetworkBehaviour
                     t.gameObject.SetActive(false);
                 }
             }
+            CHARACTER.gameObject.SetActive(true);
         }
         base.OnStartClient();
     }
@@ -31,14 +34,37 @@ public class LoadSceneOnline : NetworkBehaviour
             {
                 GameObject.Find("SAVE/LOAD STAGE").GetComponent<LoadSave>().LoadWorld();
                 GameObject.Find("SAVE/LOAD STAGE").GetComponent<SaveStage>().isHost = true;
-                
+
             }
             else //if you are not the host, but you are the local player
-            {               
+            {
                 GameObject.Find("SAVE/LOAD STAGE").GetComponent<SaveStage>().isHost = false;
             }
         }
     }
+    public Transform headPos;
+    void Update()
+    {
+        if (isLocalPlayer)
+        {
+            CmdUdpatePos(headPos.position,netId);
+        }
+    }
+    [Command(ignoreAuthority = true)]
+    void CmdUdpatePos(Vector3 pos, uint filter)
+    {
+        RpcUpdatePos(pos, filter);
+    }
+    [ClientRpc]
+    void RpcUpdatePos(Vector3 pos, uint filter)
+    {
+        if (!isLocalPlayer)
+        {
+            CHARACTER.transform.position = pos;
+        }
+    }
+
+
 
     public void SpawnIt(string url, Vector3 pos, Vector3 rot)
     {
