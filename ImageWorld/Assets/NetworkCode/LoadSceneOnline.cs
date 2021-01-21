@@ -54,8 +54,13 @@ public class LoadSceneOnline : NetworkBehaviour
     [ClientRpc]
     void RpcSpawnImage(uint filter, string url, Vector3 pos, Vector3 rot)
     {
-
-            StartCoroutine(DownloadImage(url, pos, rot));        
+        //StartCoroutine(DownloadImage(url, pos, rot));
+        if (NetworkServer.active)
+        {
+            GameObject i = Instantiate(spawnedMesh, pos, Quaternion.Euler(rot));
+            NetworkServer.Spawn(i);
+            i.GetComponent<ImageSyncer>().SpawnTex(url);
+        }
     }
 
     public GameObject spawnedMesh;

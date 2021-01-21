@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
 public class InteractorScript : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class InteractorScript : MonoBehaviour
     public SpriteRenderer crosshair;
     public Sprite[] hairs;
 
-
+    public NetworkIdentity nid;
 
     void Update()
     {
@@ -211,13 +212,13 @@ public class InteractorScript : MonoBehaviour
             {           
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    if (interactedOBJ == null)
+                    if (interactedOBJ == null && hit.collider.gameObject.transform.parent.transform.parent.parent== GameObject.Find("ALL_IMAGES").transform)
                     {
                         interactedOBJ = hit.collider.gameObject.transform.parent.transform.parent.gameObject;
                     }
                     if (interactedOBJ.GetComponent<ImageSyncer>())
                     {
-                        interactedOBJ.GetComponent<ImageSyncer>().UpdatePos();
+                        interactedOBJ.GetComponent<ImageSyncer>().UpdatePos(nid.netId);
                     }
                     //Debug.Log("HEY HEY HEY");
                 }

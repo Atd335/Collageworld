@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using Mirror;
 
 public class ImageSyncer : NetworkBehaviour
@@ -8,8 +9,16 @@ public class ImageSyncer : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (NetworkIdentity n in GameObject.Find("WORLD").GetComponentsInChildren<NetworkIdentity>())
+        {
+            if (n.isLocalPlayer)
+            {
+                localID = n;
+            }
+        }
     }
+
+    NetworkIdentity localID;
 
     // Update is called once per frame
     void Update()
@@ -17,20 +26,51 @@ public class ImageSyncer : NetworkBehaviour
 
     }
 
-    public void UpdatePos()
+    public void UpdatePos(uint filter)
     {
-        CmdUpdatePos(transform.position);
+        CmdUpdatePos(transform.position,filter);
     }
 
     [Command(ignoreAuthority = true)]
-    void CmdUpdatePos(Vector3 pos)
+    void CmdUpdatePos(Vector3 pos,uint filter)
     {
-        RpcUpdatePos(pos);
+        RpcUpdatePos(pos,filter);
     }
     [ClientRpc]
-    void RpcUpdatePos(Vector3 pos)
+    void RpcUpdatePos(Vector3 pos,uint filter)
     {
-        transform.position = pos;
+        if (localID.netId != filter)
+        {
+            transform.position = pos;
+        }
     }
 
+    public void SpawnTex(string url)
+    {
+        CmdSpawnTex(url);
+    }
+
+    [Command(ignoreAuthority = true)]
+    void CmdSpawnTex(string url)
+    {
+        RpcSpawnTex(url);
+    }
+    [ClientRpc]
+    void RpcSpawnTex(string url)
+    {
+        StartCoroutine(DownloadImage(url));
+    }
+
+
+    IEnumerator DownloadImage(string MediaUrl)
+    {
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return request.SendWebRequest();
+        if (request.isNetworkError || request.isHttpError)
+            Debug.Log(request.error);
+        else
+            Debug.Log("SET!");
+        //((DownloadHandlerTexture)request.downloadHandler).texture;
+        GetComponentInChildren<TextureHavenScript>().CreateImageOnline(((DownloadHandlerTexture)request.downloadHandler).texture);
+    }
 }
