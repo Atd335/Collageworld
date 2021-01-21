@@ -64,6 +64,8 @@ public class TextureEditorTest : MonoBehaviour
                 if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
                     hit.collider.GetComponentInParent<TextureHavenScript>().UpdateColliders();
+                    if(hit.collider.GetComponentInParent<ImageSyncer>())
+                        hit.collider.GetComponentInParent<ImageSyncer>().UpdateImageData();
                 }
             }
         }

@@ -103,7 +103,10 @@ public class InteractorScript : MonoBehaviour
                     {
                         colorInt = 0;
                     }
-                    hit.collider.gameObject.transform.parent.transform.parent.GetComponent<TextureHavenScript>().changeColor(colors[colorInt]);
+                    if (hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>())
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>().SetColor(colors[colorInt]);
+                    else
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<TextureHavenScript>().changeColor(colors[colorInt]);
                 }
                 else if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
@@ -112,7 +115,10 @@ public class InteractorScript : MonoBehaviour
                     {
                         colorInt = colors.Length-1;
                     }
-                    hit.collider.gameObject.transform.parent.transform.parent.GetComponent<TextureHavenScript>().changeColor(colors[colorInt]);
+                    if (hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>())
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>().SetColor(colors[colorInt]);
+                    else
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<TextureHavenScript>().changeColor(colors[colorInt]);
                 }
             }
         }
@@ -127,10 +133,14 @@ public class InteractorScript : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     hit.collider.gameObject.transform.parent.transform.parent.Rotate(0,180,0);
+                    if(hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>())
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>().UpdatePos(nid.netId);
                 }
                 else if(Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     hit.collider.gameObject.transform.parent.transform.parent.Rotate(180,0, 0);
+                    if (hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>())
+                        hit.collider.gameObject.transform.parent.transform.parent.GetComponent<ImageSyncer>().UpdatePos(nid.netId);
                 }
             }
         }
@@ -138,6 +148,7 @@ public class InteractorScript : MonoBehaviour
 
     void duplicate()
     {
+        if (GetComponent<LoadSceneOnline>()) { return; }
         if (Physics.Raycast(head.transform.position, head.forward, out hit))
         {
             if (hit.collider.tag == "interactable")
@@ -198,9 +209,16 @@ public class InteractorScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    hit.collider.gameObject.GetComponentInParent<SketchifyItem>().enabled = !hit.collider.gameObject.GetComponentInParent<SketchifyItem>().enabled;
-                    hit.collider.transform.parent.localScale = Vector3.one;
-                    hit.collider.transform.parent.localRotation = Quaternion.Euler(Vector3.zero);
+                    if (hit.collider.gameObject.transform.parent.transform.parent.gameObject.GetComponent<ImageSyncer>())
+                    {
+                        hit.collider.gameObject.transform.parent.transform.parent.gameObject.GetComponent<ImageSyncer>().ToggleSketch();
+                    }
+                    else
+                    {
+                        hit.collider.gameObject.GetComponentInParent<SketchifyItem>().enabled = !hit.collider.gameObject.GetComponentInParent<SketchifyItem>().enabled;
+                        hit.collider.transform.parent.localScale = Vector3.one;
+                        hit.collider.transform.parent.localRotation = Quaternion.Euler(Vector3.zero);
+                    }
                 }
             }
         }

@@ -101,10 +101,10 @@ MonoBehaviour:
       m_Calls: []
   port: 7777
   NoDelay: 1
-  serverMaxMessageSize: 500000
-  serverMaxReceivesPerTick: 500000
-  clientMaxMessageSize: 500000
-  clientMaxReceivesPerTick: 500000
+  serverMaxMessageSize: 9999999
+  serverMaxReceivesPerTick: 9999999
+  clientMaxMessageSize: 9999999
+  clientMaxReceivesPerTick: 9999999
 --- !u!114 &4409911112887819471
 MonoBehaviour:
   m_ObjectHideFlags: 0
