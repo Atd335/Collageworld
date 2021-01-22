@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadOnPlay: 0
   worldToLoad: New World
-  spawnedMesh: {fileID: 8723691990762865209, guid: 2ac8110f33e3cce49ad6dee0d05e1e25, type: 3}
+  spawnedMesh: {fileID: 8723691990762865209, guid: 746be466ce6fc414db211209190e45e6, type: 3}
   numOfImages: 0
 --- !u!1 &361093425
 GameObject:

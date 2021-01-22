@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 public class LoadSave : MonoBehaviour
 {
@@ -87,6 +88,10 @@ public class LoadSave : MonoBehaviour
         i.GetComponent<TextureHavenScript>().changeColor(color);
         i.GetComponentInChildren<SketchifyItem>().enabled = sketched;
         i.transform.localScale = scale;
+        if (NetworkServer.active)
+        {
+            NetworkServer.Spawn(i);
+        }
     }
 
     // Update is called once per frame

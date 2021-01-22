@@ -1389,6 +1389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 302782514}
+  - component: {fileID: 302782515}
   m_Layer: 0
   m_Name: CONNECT SCREEN
   m_TagString: Untagged
@@ -1411,6 +1412,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &302782515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302782513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4ff1b9536bece419c2362a1ff77761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IP: localhost
+  PORT: 7777
+  NM: {fileID: 0}
+  TT: {fileID: 0}
 --- !u!1 &376700795
 GameObject:
   m_ObjectHideFlags: 0
