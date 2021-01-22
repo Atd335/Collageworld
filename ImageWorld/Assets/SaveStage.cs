@@ -68,6 +68,7 @@ public class SaveStage : MonoBehaviour
                 writer.WriteLine($"SIZ: \n{i.transform.localScale.x},{i.transform.localScale.y},{i.transform.localScale.z}");
                 writer.WriteLine($"COL: \n{i.currentColor.r},{i.currentColor.g},{i.currentColor.b},{i.currentColor.a}");
                 writer.WriteLine($"SKT: \n{i.sketchified.ToString()[0]}");
+                writer.WriteLine($"URL: \n{i.url}");
                 writer.WriteLine($"------------------------------------------");
             }
 

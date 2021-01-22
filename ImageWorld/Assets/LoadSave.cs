@@ -47,29 +47,34 @@ public class LoadSave : MonoBehaviour
     Vector3 loadedScale;
     Color loadedColor;
     bool loadedSketch;
+    string loadedURL;
+
+    int numOfLines = 13;
 
     void loadImages()
     {
         for (int i = 0; i < numOfImages; i++)
         {
-            //print(lines[2 + (12 * i)]); //ID NUMBER
+            //print(lines[2 + (numOfLines * i)]); //ID NUMBER
             //name
-            imageID = lines[2 + (12 * i)];
+            imageID = lines[2 + (numOfLines * i)];
             //tex
             loadedTex = new Texture2D(1, 1, TextureFormat.ARGB32, false);
             loadedTex.LoadImage(File.ReadAllBytes("C:/CollageWorld/SavedInfo/" + $"{worldToLoad}/{imageID}.png"));
             //pos
-            loadedPos = new Vector3(float.Parse(lines[4 + (12 * i)].Split(',')[0]), float.Parse(lines[4 + (12 * i)].Split(',')[1]), float.Parse(lines[4 + (12 * i)].Split(',')[2]));
+            loadedPos = new Vector3(float.Parse(lines[4 + (numOfLines * i)].Split(',')[0]), float.Parse(lines[4 + (numOfLines * i)].Split(',')[1]), float.Parse(lines[4 + (numOfLines * i)].Split(',')[2]));
             //rot
-            loadedRot = new Vector3(float.Parse(lines[6 + (12 * i)].Split(',')[0]), float.Parse(lines[6 + (12 * i)].Split(',')[1]), float.Parse(lines[6 + (12 * i)].Split(',')[2]));
+            loadedRot = new Vector3(float.Parse(lines[6 + (numOfLines * i)].Split(',')[0]), float.Parse(lines[6 + (numOfLines * i)].Split(',')[1]), float.Parse(lines[6 + (numOfLines * i)].Split(',')[2]));
             //scale
-            loadedScale = new Vector3(float.Parse(lines[8 + (12 * i)].Split(',')[0]), float.Parse(lines[8 + (12 * i)].Split(',')[1]), float.Parse(lines[8 + (12 * i)].Split(',')[2]));
+            loadedScale = new Vector3(float.Parse(lines[8 + (numOfLines * i)].Split(',')[0]), float.Parse(lines[8 + (numOfLines * i)].Split(',')[1]), float.Parse(lines[8 + (numOfLines * i)].Split(',')[2]));
             //color
-            loadedColor = new Color(float.Parse(lines[10 + (12 * i)].Split(',')[0]), float.Parse(lines[10 + (12 * i)].Split(',')[1]), float.Parse(lines[10 + (12 * i)].Split(',')[2]), float.Parse(lines[10 + (12 * i)].Split(',')[3]));
+            loadedColor = new Color(float.Parse(lines[10 + (numOfLines * i)].Split(',')[0]), float.Parse(lines[10 + (numOfLines * i)].Split(',')[1]), float.Parse(lines[10 + (numOfLines * i)].Split(',')[2]), float.Parse(lines[10 + (numOfLines * i)].Split(',')[3]));
             //sketched
-            loadedSketch = lines[12] == "T";
+            loadedSketch = lines[12 + (numOfLines*i)] == "T";
+            //url
+            loadedURL = lines[14 + (numOfLines * i)];
 
-            SpawnIt(loadedTex, loadedPos, loadedRot, loadedScale, loadedColor, loadedSketch);
+            SpawnIt(loadedTex, loadedPos, loadedRot, loadedScale, loadedColor, loadedSketch, loadedURL);
 
             //SPAWN THE OBJECT
         }
@@ -77,7 +82,7 @@ public class LoadSave : MonoBehaviour
         Debug.Log("WorldLoaded");
     }
 
-    public void SpawnIt(Texture2D tex, Vector3 pos, Vector3 rot, Vector3 scale, Color color, bool sketched)
+    public void SpawnIt(Texture2D tex, Vector3 pos, Vector3 rot, Vector3 scale, Color color, bool sketched, string url)
     {
 
         //create the gameobject
@@ -88,6 +93,7 @@ public class LoadSave : MonoBehaviour
         i.GetComponent<TextureHavenScript>().changeColor(color);
         i.GetComponentInChildren<SketchifyItem>().enabled = sketched;
         i.transform.localScale = scale;
+        i.GetComponent<TextureHavenScript>().url = url;
         if (NetworkServer.active)
         {
             NetworkServer.Spawn(i);

@@ -37,6 +37,10 @@ public class ImageSyncer : NetworkBehaviour
     {
         if (NetworkServer.active)
         {
+            if (loadedUrl == "" || loadedUrl == null)
+            {
+                loadedUrl = GetComponent<TextureHavenScript>().url;
+            }
             CmdSendUrl(loadedUrl, filter);            
         }
     }
